@@ -1,9 +1,3 @@
 [build]
-  publish = "."
-
-[[redirects]]
-  from = "/channels.m3u"
-  to = "http://getxc.top/get.php?username=joao2025@@@&password=joao20252025&type=m3u_plus&output=hls"
-  status = 200
-  force = true
-  headers = { Cache-Control = "no-store" }
+  publish = "public"
+  functions = "netlify/functions"
