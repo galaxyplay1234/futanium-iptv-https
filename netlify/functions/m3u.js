@@ -1,20 +1,21 @@
-// Netlify Function: proxy da sua playlist M3U (busca em tempo real)
 export async function handler(event, context) {
   try {
     const upstream = "http://getxc.top/get.php?username=joao2025@@@&password=joao20252025&type=m3u_plus&output=hls";
 
     const r = await fetch(upstream, {
       headers: {
-        "User-Agent": "FutaniumIPTV-Lite/1.0 (Netlify)",
-        // Se o servidor exigir, descomente:
-        // "Referer": "http://getxc.top/"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+        "Accept": "*/*",
+        "Accept-Encoding": "identity",
+        "Referer": "http://getxc.top/",   // 👈 muitos painéis exigem isso
+        "Connection": "keep-alive",
       },
       redirect: "follow",
     });
 
     if (!r.ok) {
       return {
-        statusCode: 502,
+        statusCode: r.status,
         body: `Upstream error: ${r.status}`,
       };
     }
